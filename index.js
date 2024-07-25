@@ -30,7 +30,7 @@ async function main() {
         {
             type: 'input',
             name: 'color',
-            message: 'Enter the shape color (word or hecadecimal code):'
+            message: 'Enter the shape color (word or hexadecimal code):'
         }
     ]);
 
