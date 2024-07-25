@@ -6,9 +6,20 @@ async function main() {
     let shape;
     const answers = await inquirer.prompt([
         {
+            type: 'list',
+            name: 'shape',
+            message: 'Choose a shape:',
+            choices: ['circle', 'triangle', 'rectangle']
+        },
+        {
+            type: 'input',
+            name: 'color',
+            message: 'Enter the shape color (word or hexadecimal code):'
+        },
+        {
             type: 'input',
             name: 'text',
-            message: "Type three or less characters:",
+            message: "Type the text for the logo (three or less characters):",
             validate: async (input) => {
                 if (input.length <= 3) {
                     return true;
@@ -20,17 +31,6 @@ async function main() {
             type: 'input',
             name: 'textColor',
             message: "Enter the text color (word or hexadecimal code):"
-        },
-        {
-            type: 'list',
-            name: 'shape',
-            message: 'Choose a shape:',
-            choices: ['circle', 'triangle', 'rectangle']
-        },
-        {
-            type: 'input',
-            name: 'color',
-            message: 'Enter the shape color (word or hexadecimal code):'
         }
     ]);
 
