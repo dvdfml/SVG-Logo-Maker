@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
-const { Circle, Triangle } = require('./lib/shapes');
+const { Circle, Triangle, Rectangle } = require('./lib/shapes');
 const fs = require('fs');
-const { error } = require('console');
 
 async function main() {
+    let shape;
     const answers = await inquirer.prompt([
         {
             type: 'input',
@@ -36,16 +36,25 @@ async function main() {
 
     switch (answers.shape) {
         case 'circle':
-            const shape = new Circle(answers.color, answers.text, answers.textColor);
-            console.log(shape.render());
-            const data = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-    ${shape.render()}
-</svg>`;
-            fs.writeFile('./examples/logo.svg', data, (err) =>
-                err ? console.error(err) : console.log('Success!')
-            );
+            shape = new Circle(answers.color, answers.text, answers.textColor);
             break;
+
+        case 'triangle':
+            shape = new Triangle(answers.color, answers.text, answers.textColor);
+            break;
+
+        case 'rectangle':
+            shape = new Rectangle(answers.color, answers.text, answers.textColor);
     }
+
+    const data = `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+    ${shape.render()}
+    ${shape.renderText()}
+</svg>`;
+
+    fs.writeFile('./examples/logo.svg', data, (err) =>
+        err ? console.error(err) : console.log('Success!')
+    );
 }
 
 main();
